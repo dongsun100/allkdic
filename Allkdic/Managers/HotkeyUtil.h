@@ -22,9 +22,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AKHotKeyManager : NSObject
+@interface HotkeyUtil : NSObject
 
-+ (void)registerHotKey;
-+ (void)unregisterHotKey;
++ (void)registerHotkeyEventHandler;
++ (void)unregisterHotkeyEventHandler;
+
++ (NSString *)stringForKeyCode:(CGKeyCode)keyCode;
++ (CGKeyCode)keyCodeForString:(NSString *)string;
 
 @end

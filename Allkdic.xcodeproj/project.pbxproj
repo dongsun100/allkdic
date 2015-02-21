@@ -10,13 +10,14 @@
 		0315897319FD4E0D002D5A7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0315897219FD4E0D002D5A7C /* AboutWindowController.swift */; };
 		0315897519FD5069002D5A7C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0315897419FD5069002D5A7C /* Label.swift */; };
 		0315897819FD50E1002D5A7C /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0315897719FD50E1002D5A7C /* LabelButton.swift */; };
+		031F10DC1A977DD4009AECBE /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 031F10DB1A977DD4009AECBE /* Notifications.m */; };
 		0320F9FD18AA6D9000D989F6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0320F9FC18AA6D9000D989F6 /* Security.framework */; };
 		0322CF7E17AE9965007E832C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0322CF7D17AE9965007E832C /* Cocoa.framework */; };
 		0322CF9E17AE9BBB007E832C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0322CF9D17AE9BBB007E832C /* WebKit.framework */; };
 		0322CFA517AF3A6C007E832C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0322CFA417AF3A6C007E832C /* Carbon.framework */; };
 		0328DE081A0FA00D00160E93 /* AllkdicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328DE071A0FA00D00160E93 /* AllkdicTests.swift */; };
 		0349451719FB8D4D00D7AEE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349451619FB8D4D00D7AEE2 /* AppDelegate.swift */; };
-		0349451A19FB9D1800D7AEE2 /* AKHotKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349451919FB9D1800D7AEE2 /* AKHotKeyManager.m */; };
+		0349451A19FB9D1800D7AEE2 /* HotkeyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349451919FB9D1800D7AEE2 /* HotkeyUtil.m */; };
 		0349451E19FBB01700D7AEE2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349451D19FBB01700D7AEE2 /* main.swift */; };
 		0349452019FBB24100D7AEE2 /* AllkdicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349451F19FBB24100D7AEE2 /* AllkdicManager.swift */; };
 		0349452219FBB68D00D7AEE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349452119FBB68D00D7AEE2 /* Constants.swift */; };
@@ -27,8 +28,7 @@
 		0362B0CE19FD2D2B00C88610 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0362B0CD19FD2D2B00C88610 /* WindowController.swift */; };
 		0367293617B00CEC0074D249 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0367293317B00CEC0074D249 /* InfoPlist.strings */; };
 		0367297717B052B70074D249 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0367297617B052B70074D249 /* dsa_pub.pem */; };
-		038DDCA81A051BE700754ECC /* KeyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038DDCA71A051BE700754ECC /* KeyBinding.swift */; };
-		038DDCAA1A051DA800754ECC /* KeyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038DDCA91A051DA800754ECC /* KeyMap.swift */; };
+		038DDCA81A051BE700754ECC /* Hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038DDCA71A051BE700754ECC /* Hotkey.swift */; };
 		038DDCAD1A0536EA00754ECC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0322CF8017AE9965007E832C /* AppKit.framework */; };
 		03A5C49C1A05FDFF001122AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03A5C49B1A05FDFF001122AB /* Images.xcassets */; };
 		03C0861D17B064480070A164 /* LoginUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C0861C17B064480070A164 /* LoginUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -62,6 +62,9 @@
 		0315897219FD4E0D002D5A7C /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		0315897419FD5069002D5A7C /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = Allkdic/Controls/Label.swift; sourceTree = SOURCE_ROOT; };
 		0315897719FD50E1002D5A7C /* LabelButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabelButton.swift; path = Allkdic/Controls/LabelButton.swift; sourceTree = SOURCE_ROOT; };
+		031F10DA1A977DD4009AECBE /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notifications.h; path = Allkdic/Constants/Notifications.h; sourceTree = SOURCE_ROOT; };
+		031F10DB1A977DD4009AECBE /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Notifications.m; path = Allkdic/Constants/Notifications.m; sourceTree = SOURCE_ROOT; };
+		031F10DD1A97C312009AECBE /* Modifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Modifier.h; path = Allkdic/Models/Modifier.h; sourceTree = SOURCE_ROOT; };
 		0320F9FC18AA6D9000D989F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0322CF7A17AE9965007E832C /* Allkdic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Allkdic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0322CF7D17AE9965007E832C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -75,8 +78,8 @@
 		0328DE071A0FA00D00160E93 /* AllkdicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllkdicTests.swift; sourceTree = "<group>"; };
 		0349451619FB8D4D00D7AEE2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Allkdic/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		0349451819FB8D8000D7AEE2 /* Allkdic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Allkdic-Bridging-Header.h"; path = "Allkdic/Allkdic-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		0349451919FB9D1800D7AEE2 /* AKHotKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKHotKeyManager.m; path = Allkdic/Managers/AKHotKeyManager.m; sourceTree = SOURCE_ROOT; };
-		0349451C19FB9D2B00D7AEE2 /* AKHotKeyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKHotKeyManager.h; path = Allkdic/Managers/AKHotKeyManager.h; sourceTree = SOURCE_ROOT; };
+		0349451919FB9D1800D7AEE2 /* HotkeyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HotkeyUtil.m; path = Allkdic/Managers/HotkeyUtil.m; sourceTree = SOURCE_ROOT; };
+		0349451C19FB9D2B00D7AEE2 /* HotkeyUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HotkeyUtil.h; path = Allkdic/Managers/HotkeyUtil.h; sourceTree = SOURCE_ROOT; };
 		0349451D19FBB01700D7AEE2 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Allkdic/main.swift; sourceTree = SOURCE_ROOT; };
 		0349451F19FBB24100D7AEE2 /* AllkdicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllkdicManager.swift; path = Allkdic/Managers/AllkdicManager.swift; sourceTree = SOURCE_ROOT; };
 		0349452119FBB68D00D7AEE2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Allkdic/Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -89,8 +92,7 @@
 		0367292D17B00CD90074D249 /* Allkdic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Allkdic-Info.plist"; path = "Allkdic/Allkdic-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0367293417B00CEC0074D249 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Allkdic/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		0367297617B052B70074D249 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		038DDCA71A051BE700754ECC /* KeyBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyBinding.swift; path = Allkdic/Models/KeyBinding.swift; sourceTree = SOURCE_ROOT; };
-		038DDCA91A051DA800754ECC /* KeyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyMap.swift; path = Allkdic/Models/KeyMap.swift; sourceTree = SOURCE_ROOT; };
+		038DDCA71A051BE700754ECC /* Hotkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hotkey.swift; path = Allkdic/Models/Hotkey.swift; sourceTree = SOURCE_ROOT; };
 		03A5C49B1A05FDFF001122AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		03C0861B17B064480070A164 /* LoginUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginUtil.h; path = Allkdic/LoginUtil.h; sourceTree = SOURCE_ROOT; };
 		03C0861C17B064480070A164 /* LoginUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginUtil.m; path = Allkdic/LoginUtil.m; sourceTree = SOURCE_ROOT; };
@@ -130,6 +132,27 @@
 				0315897719FD50E1002D5A7C /* LabelButton.swift */,
 			);
 			name = Controls;
+			sourceTree = "<group>";
+		};
+		031F10D81A976B8A009AECBE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				03C0861B17B064480070A164 /* LoginUtil.h */,
+				03C0861C17B064480070A164 /* LoginUtil.m */,
+				0349451C19FB9D2B00D7AEE2 /* HotkeyUtil.h */,
+				0349451919FB9D1800D7AEE2 /* HotkeyUtil.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		031F10D91A977D82009AECBE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0349452119FBB68D00D7AEE2 /* Constants.swift */,
+				031F10DA1A977DD4009AECBE /* Notifications.h */,
+				031F10DB1A977DD4009AECBE /* Notifications.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		0322CF7117AE9964007E832C = {
@@ -179,10 +202,9 @@
 		0322CF8317AE9965007E832C /* Allkdic */ = {
 			isa = PBXGroup;
 			children = (
-				0349452119FBB68D00D7AEE2 /* Constants.swift */,
 				0349451619FB8D4D00D7AEE2 /* AppDelegate.swift */,
-				03C0861B17B064480070A164 /* LoginUtil.h */,
-				03C0861C17B064480070A164 /* LoginUtil.m */,
+				031F10D91A977D82009AECBE /* Constants */,
+				031F10D81A976B8A009AECBE /* Utils */,
 				0349451B19FB9D1D00D7AEE2 /* Managers */,
 				0315897619FD506D002D5A7C /* Controls */,
 				0367295D17B0458D0074D249 /* Controllers */,
@@ -217,8 +239,8 @@
 		0324201017E38EC3003025E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				038DDCA91A051DA800754ECC /* KeyMap.swift */,
-				038DDCA71A051BE700754ECC /* KeyBinding.swift */,
+				031F10DD1A97C312009AECBE /* Modifier.h */,
+				038DDCA71A051BE700754ECC /* Hotkey.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -244,8 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				0349451F19FBB24100D7AEE2 /* AllkdicManager.swift */,
-				0349451C19FB9D2B00D7AEE2 /* AKHotKeyManager.h */,
-				0349451919FB9D1800D7AEE2 /* AKHotKeyManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -434,7 +454,7 @@
 				03579FB41A069C6E00A82B3B /* NSWindow+CanBecomeKeyWindow.swift in Sources */,
 				0315897319FD4E0D002D5A7C /* AboutWindowController.swift in Sources */,
 				0362B0CC19FD146B00C88610 /* PreferenceWindowController.swift in Sources */,
-				0349451A19FB9D1800D7AEE2 /* AKHotKeyManager.m in Sources */,
+				0349451A19FB9D1800D7AEE2 /* HotkeyUtil.m in Sources */,
 				0349452019FBB24100D7AEE2 /* AllkdicManager.swift in Sources */,
 				0349455A19FCF0A900D7AEE2 /* WebView+Key.m in Sources */,
 				0349451719FB8D4D00D7AEE2 /* AppDelegate.swift in Sources */,
@@ -443,8 +463,8 @@
 				0349451E19FBB01700D7AEE2 /* main.swift in Sources */,
 				0315897519FD5069002D5A7C /* Label.swift in Sources */,
 				0315897819FD50E1002D5A7C /* LabelButton.swift in Sources */,
-				038DDCA81A051BE700754ECC /* KeyBinding.swift in Sources */,
-				038DDCAA1A051DA800754ECC /* KeyMap.swift in Sources */,
+				031F10DC1A977DD4009AECBE /* Notifications.m in Sources */,
+				038DDCA81A051BE700754ECC /* Hotkey.swift in Sources */,
 				03C0861D17B064480070A164 /* LoginUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

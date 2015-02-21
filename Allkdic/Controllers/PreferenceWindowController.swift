@@ -26,7 +26,7 @@ import Snap
 
 class PreferenceWindowController: WindowController, NSTextFieldDelegate {
 
-    var keyBinding: KeyBinding?
+    var hotkey: Hotkey?
 
     let label = Label()
     let hotKeyTextField = NSTextField()
@@ -103,26 +103,37 @@ class PreferenceWindowController: WindowController, NSTextFieldDelegate {
             make.left.equalTo(self.commandLabel.snp_right).with.offset(-3)
             make.centerY.equalTo(self.hotKeyTextField)
         }
+
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "hotkeyDidPress:",
+            name: LocalHotkeyDidPressNotification,
+            object: nil
+        )
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     override func showWindow(sender: AnyObject?) {
         super.showWindow(sender)
 
-        AKHotKeyManager.unregisterHotKey()
+        HotkeyUtil.unregisterHotkeyEventHandler()
 
-        let keyBindingData = NSUserDefaults.standardUserDefaults().dictionaryForKey(UserDefaultsKey.HotKey)
-        let keyBinding = KeyBinding(dictionary: keyBindingData)
-        self.handleKeyBinding(keyBinding)
+        let data = NSUserDefaults.standardUserDefaults().dictionaryForKey(UserDefaultsKey.HotKey)
+        let hotkey = Hotkey(dictionary: data)
+        self.updateHotkeyField(hotkey)
 
         AnalyticsHelper.sharedInstance().recordScreenWithName("PreferenceWindow")
     }
 
     func windowShouldClose(sender: AnyObject?) -> Bool {
-        AKHotKeyManager.registerHotKey()
+        HotkeyUtil.registerHotkeyEventHandler()
         return true
     }
 
@@ -136,50 +147,49 @@ class PreferenceWindowController: WindowController, NSTextFieldDelegate {
         }
     }
 
-    func handleKeyBinding(keyBinding: KeyBinding?) {
-        if keyBinding? == nil {
+    func hotkeyDidPress(notification: NSNotification) {
+        let hotkey = notification.object as Hotkey
+        self.updateHotkeyField(hotkey)
+    }
+
+    func updateHotkeyField(hotkey: Hotkey) {
+        if hotkey.modifier == .allZeros {
+            return
+        }
+        if self.hotkey == hotkey {
             return
         }
 
-        if !keyBinding!.shift && !keyBinding!.control && !keyBinding!.option && !keyBinding!.command {
-            return
-        }
-
-        if self.keyBinding == keyBinding {
-            return
-        }
-
-        self.keyBinding = keyBinding
+        self.hotkey = hotkey
         self.shiftLabel.textColor = NSColor.lightGrayColor()
         self.controlLabel.textColor = NSColor.lightGrayColor()
         self.altLabel.textColor = NSColor.lightGrayColor()
         self.commandLabel.textColor = NSColor.lightGrayColor()
 
-        if keyBinding!.shift {
+        if hotkey.shift {
             self.shiftLabel.textColor = NSColor.blackColor()
         }
-        if keyBinding!.control {
+        if hotkey.control {
             self.controlLabel.textColor = NSColor.blackColor()
         }
-        if keyBinding!.option {
+        if hotkey.option {
             self.altLabel.textColor = NSColor.blackColor()
         }
-        if keyBinding!.command {
+        if hotkey.command {
             self.commandLabel.textColor = NSColor.blackColor()
         }
 
-        let keyString = KeyBinding.keyStringFormKeyCode(keyBinding!.keyCode)
-        if keyString? == nil {
+        let keyString = HotkeyUtil.stringForKeyCode(hotkey.keyCode)
+        if keyString == nil {
             return
         }
-        self.keyLabel.stringValue = keyString!.capitalizedString
+        self.keyLabel.stringValue = keyString.capitalizedString
         self.keyLabel.sizeToFit()
 
-        NSUserDefaults.standardUserDefaults().setObject(keyBinding!.toDictionary(), forKey: UserDefaultsKey.HotKey)
+        NSUserDefaults.standardUserDefaults().setObject(hotkey.dictionaryValue, forKey: UserDefaultsKey.HotKey)
         NSUserDefaults.standardUserDefaults().synchronize()
 
         AllkdicManager.sharedInstance().contentViewController.updateHotKeyLabel()
-
         AnalyticsHelper.sharedInstance().recordCachedEventWithCategory(
             AnalyticsCategory.Preference,
             action: AnalyticsAction.UpdateHotKey,

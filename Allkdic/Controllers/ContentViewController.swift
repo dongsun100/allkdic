@@ -144,9 +144,23 @@ public class ContentViewController: NSViewController {
         self.navigateToMain()
     }
 
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "hotkeyDidPress:",
+            name: LocalHotkeyDidPressNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     public func updateHotKeyLabel() {
         let keyBindingData = NSUserDefaults.standardUserDefaults().dictionaryForKey(UserDefaultsKey.HotKey)
-        let keyBinding = KeyBinding(dictionary: keyBindingData)
+        let keyBinding = Hotkey(dictionary: keyBindingData)
         self.hotKeyLabel.stringValue = keyBinding.description
         self.hotKeyLabel.sizeToFit()
     }
@@ -238,24 +252,20 @@ public class ContentViewController: NSViewController {
         return self.webView.mainFrameDocument!.evaluateWebScript(script)
     }
 
-    public func handleKeyBinding(keyBinding: KeyBinding) {
-        let key = (keyBinding.shift, keyBinding.control, keyBinding.option, keyBinding.command, keyBinding.keyCode)
-
-        switch key {
+    func hotkeyDidPress(notification: NSNotification) {
+        let hotkey = notification.object as Hotkey
+        switch hotkey.tupleValue {
+        // ESC
         case (false, false, false, false, 53):
-            // ESC
             AllkdicManager.sharedInstance().close()
-            break
 
-        case (true, false, false, true, let index) where 18...(18 + DictionaryInfo.count) ~= index:
-            // Command + 1, 2, 3, ...
-            self.swapDictionary(index - 18)
-            break
+        // Command + 1, 2, 3, ...
+        case (true, false, false, true, let num) where 18...(18 + DictionaryInfo.count) ~= num:
+            self.swapDictionary(num - 18)
 
-        case (false, false, false, true, KeyBinding.keyCodeFormKeyString(",")):
-            // Command + 1, 2, 3, ...
+        // Command + ,
+        case (false, false, false, true, HotkeyUtil.keyCodeForString(",")):
             self.showPreferenceWindow()
-            break
 
         default:
             break

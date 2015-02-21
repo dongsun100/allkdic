@@ -22,7 +22,9 @@
  SOFTWARE.
 */
 
-#import "AKHotKeyManager.h"
+#import "HotkeyUtil.h"
 #import "LoginUtil.h"
+#import "Modifier.h"
+#import "Notifications.h"
 
 #import <Sparkle/SUUpdater.h>

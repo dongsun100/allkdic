@@ -40,7 +40,25 @@ class AllkdicManager: NSObject {
 
     override init() {
         super.init()
+        NSEvent.addGlobalMonitorForEventsMatchingMask(.LeftMouseUpMask | .LeftMouseDownMask) { _ in self.close() }
+        NSEvent.addLocalMonitorForEventsMatchingMask(.KeyDownMask) { event in
+            let hotkey = Hotkey(event: event)
+            NSNotificationCenter.defaultCenter().postNotificationName(LocalHotkeyDidPressNotification, object: hotkey)
+            return event
+        }
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "open",
+            name: GlobalHotkeyDidPressNotification,
+            object: nil
+        )
+    }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    func attachToStatusBar() {
         let icon = NSImage(named: "statusicon_default")
         icon?.setTemplate(true)
         self.statusItem.image = icon
@@ -53,15 +71,6 @@ class AllkdicManager: NSObject {
         button.setButtonType(.PushOnPushOffButton)
 
         self.popover.contentViewController = self.contentViewController
-
-        NSEvent.addGlobalMonitorForEventsMatchingMask(.LeftMouseUpMask | .LeftMouseDownMask, handler: { event in
-            self.close()
-        })
-
-        NSEvent.addLocalMonitorForEventsMatchingMask(.KeyDownMask, handler: { (event) -> NSEvent in
-            self.handleKeyCode(event.keyCode, flags: event.modifierFlags, windowNumber: event.windowNumber)
-            return event
-        })
     }
 
     func open() {
@@ -77,6 +86,8 @@ class AllkdicManager: NSObject {
         self.popover.showRelativeToRect(NSZeroRect, ofView: button, preferredEdge: NSMaxYEdge)
         self.contentViewController.updateHotKeyLabel()
         self.contentViewController.focusOnTextArea()
+
+        NSNotificationCenter.defaultCenter().postNotificationName(PopoverDidOpenNotification, object: nil)
 
         AnalyticsHelper.sharedInstance().recordScreenWithName("AllkdicWindow")
         AnalyticsHelper.sharedInstance().recordCachedEventWithCategory(
@@ -103,20 +114,5 @@ class AllkdicManager: NSObject {
             label: nil,
             value: nil
         )
-    }
-
-    func handleKeyCode(keyCode: UInt16, flags: NSEventModifierFlags, windowNumber: Int) {
-        let keyBinding = KeyBinding(keyCode: Int(keyCode), flags: Int(flags.rawValue))
-
-        let window = NSApp.windowWithWindowNumber(windowNumber)
-        if window? == nil {
-            return
-        }
-
-        if window!.dynamicType.className() == "NSStatusBarWindow" {
-            self.contentViewController.handleKeyBinding(keyBinding)
-        } else if window!.windowController()? != nil && window!.windowController()! is PreferenceWindowController {
-            window!.windowController()!.handleKeyBinding(keyBinding)
-        }
     }
 }

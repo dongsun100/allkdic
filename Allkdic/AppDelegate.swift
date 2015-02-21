@@ -31,7 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.moveToApplicationFolderIfNeeded()
 
-        AKHotKeyManager.registerHotKey()
+        HotkeyUtil.registerHotkeyEventHandler()
+        AllkdicManager.sharedInstance().attachToStatusBar()
 
         if !LoginUtil.willStartAtLogin() {
             LoginUtil.setStartAtLoginEnabled(true)

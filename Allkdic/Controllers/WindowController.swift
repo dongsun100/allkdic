@@ -59,4 +59,5 @@ class WindowController: NSWindowController, NSWindowDelegate {
         self.window?.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey))) // NSScreenSaverWindowLevel
         super.showWindow(sender)
     }
+
 }
