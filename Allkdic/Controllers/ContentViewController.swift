@@ -253,6 +253,10 @@ public class ContentViewController: NSViewController {
     }
 
     func hotkeyDidPress(notification: NSNotification) {
+        if self.view.window?.keyWindow != true {
+            return
+        }
+
         let hotkey = notification.object as Hotkey
         switch hotkey.tupleValue {
         // ESC

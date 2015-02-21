@@ -148,6 +148,9 @@ class PreferenceWindowController: WindowController, NSTextFieldDelegate {
     }
 
     func hotkeyDidPress(notification: NSNotification) {
+        if self.window?.keyWindow != true {
+            return
+        }
         let hotkey = notification.object as Hotkey
         self.updateHotkeyField(hotkey)
     }
